@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h2>Task Manager Pro</h2>
+        <button onclick="logout()" class="logout-btn">Logout</button>
+    </div>
+
+    <!-- Dashboard Statistics -->
+    <div class="stats-container" id="statsContainer">
+        <div class="stat-box"><h3>0</h3><p>Total Tasks</p></div>
+        <div class="stat-box"><h3>0</h3><p>Pending</p></div>
+        <div class="stat-box"><h3>0</h3><p>In Progress</p></div>
+        <div class="stat-box"><h3>0</h3><p>Completed</p></div>
+    </div>
+
+    <div class="container dashboard-container">
+        
+        <!-- Add Task Box -->
+        <div class="add-task-box section-box">
+            <h3>Add New Task</h3>
+            <div class="input-row">
+                <input id="title" type="text" placeholder="Task Title">
+                <input id="desc" type="text" placeholder="Description">
+            </div>
+            <div class="input-row">
+                <select id="add-priority">
+                    <option value="low">Low Priority</option>
+                    <option value="medium" selected>Medium Priority</option>
+                    <option value="high">High Priority</option>
+                </select>
+                <input id="add-dueDate" type="date">
+                <button onclick="addTask()" class="primary-btn">Add Task</button>
+            </div>
+        </div>
+
+        <p id="error-message" class="error"></p>
+
+        <!-- Filters & Search -->
+        <div class="filters-box section-box">
+            <input type="text" id="filter-search" placeholder="Search tasks by title..." onkeyup="applyFilters()">
+            <select id="filter-status" onchange="applyFilters()">
+                <option value="">All Statuses</option>
+                <option value="pending">Pending</option>
+                <option value="in-progress">In Progress</option>
+                <option value="completed">Completed</option>
+            </select>
+            <select id="filter-priority" onchange="applyFilters()">
+                <option value="">All Priorities</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+            <input type="date" id="filter-dueDate" onchange="applyFilters()">
+        </div>
+
+        <!-- Task List Grid -->
+        <div id="taskList" class="task-grid"></div>
+    </div>
+
+    <!-- History Modal -->
+    <div id="historyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 id="modal-task-title">Task History</h3>
+            <ul id="modal-history-list" class="history-list">
+                <!-- History items injected here -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- Edit Task Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <h3>Edit Task</h3>
+            <input type="hidden" id="edit-id">
+            <div class="input-row" style="flex-direction: column;">
+                <input id="edit-title" type="text" placeholder="Task Title">
+                <input id="edit-desc" type="text" placeholder="Description">
+            </div>
+            <div class="input-row">
+                <select id="edit-priority">
+                    <option value="low">Low Priority</option>
+                    <option value="medium">Medium Priority</option>
+                    <option value="high">High Priority</option>
+                </select>
+                <input id="edit-dueDate" type="date">
+            </div>
+            <button onclick="submitEditTask()" class="primary-btn" style="width: 100%; margin-top: 15px;">Save Changes</button>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
