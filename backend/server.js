@@ -1,7 +1,7 @@
-require("dotenv").config();
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env") });
 const express = require("express");
 const cors = require("cors");
-const path = require("path");
 const connectDB = require("./config/db");
 
 const authRoutes = require("./routes/auth");
@@ -24,7 +24,7 @@ connectDB();
 app.use(express.static(path.join(__dirname, "../frontend")));
 
 // Load index.html by default
-app.get("*", (req, res) => {
+app.get("/*splat", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
