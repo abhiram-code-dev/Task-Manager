@@ -1,8 +1,19 @@
 {
+  "name": "task-manager-unified",
+  "version": "1.0.0",
+  "description": "Unified Task Manager with Express Backend and Vanilla HTML/JS Frontend",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "install-all": "npm install && cd backend && npm install",
+    "dev": "node backend/server.js"
+  },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.4.1"
   }
 }
