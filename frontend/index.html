@@ -2,39 +2,58 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager - Login</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager — Login</title>
+  <meta name="description" content="Sign in to Task Manager to organize your work efficiently.">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="container">
-        <h2 style="text-align: center; margin-bottom: 20px;">Task Manager</h2>
+  <div class="login-page">
+    <div class="login-card">
 
-        <div class="form-container section-box" style="text-align: center; margin-top: 40px; border-radius: 12px;">
-            <h3 id="form-title" style="margin-bottom: 20px;">Login to your account</h3>
+      <!-- Logo -->
+      <div class="login-logo">
+        <div class="logo-icon">✓</div>
+        <span>TaskManager</span>
+      </div>
 
-            <div class="input-row" style="flex-direction: column;">
-                <input id="username" type="text" placeholder="Username" required>
-                <div class="password-wrapper" style="position: relative; width: 100%;">
-                    <input id="password" type="password" placeholder="Password" style="width: 100%;" required>
-                    <button type="button" id="togglePassword"
-                        style="position: absolute; right: 10px; top: 10px; background: none; border: none; cursor: pointer; padding: 0; color: #666; font-size: 16px;">👁</button>
-                </div>
-            </div>
+      <!-- Heading -->
+      <h2 id="form-title">Welcome back</h2>
+      <p class="login-subtitle" id="form-subtitle">Sign in to your account to continue.</p>
 
-            <div class="btn-group" style="margin-top: 15px; justify-content: center;">
-                <button onclick="login()" id="login-btn">Login</button>
-                <button onclick="signup()" id="signup-btn" class="secondary-btn">Create an account</button>
-            </div>
+      <!-- Username -->
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" type="text" placeholder="Enter your username" autocomplete="username" required>
+      </div>
 
-            <p id="error-message" class="error" style="margin-top: 15px;"></p>
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <input id="password" type="password" placeholder="Enter your password" autocomplete="current-password"
+            required>
+          <button type="button" id="togglePassword" class="pw-toggle" title="Toggle password">👁</button>
         </div>
-    </div>
+      </div>
 
-    <script src="script.js"></script>
+      <!-- Actions -->
+      <div class="login-actions">
+        <button onclick="login()" id="login-btn">Sign In</button>
+        <button onclick="signup()" id="signup-btn" class="secondary-btn">Create an account</button>
+      </div>
+
+      <span id="error-message" class="error"></span>
+    </div>
+  </div>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
 </body>
 
 </html>

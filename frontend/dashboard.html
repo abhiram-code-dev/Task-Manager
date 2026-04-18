@@ -1,33 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager - Dashboard</title>
+    <title>Task Manager — Dashboard</title>
+    <meta name="description" content="Manage and track all your tasks in one place.">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="header">
-        <h2>Task Manager Pro</h2>
-        <button onclick="logout()" class="logout-btn">Logout</button>
-    </div>
 
-    <!-- Dashboard Statistics -->
-    <div class="stats-container" id="statsContainer">
-        <div class="stat-box"><h3>0</h3><p>Total Tasks</p></div>
-        <div class="stat-box"><h3>0</h3><p>Pending</p></div>
-        <div class="stat-box"><h3>0</h3><p>In Progress</p></div>
-        <div class="stat-box"><h3>0</h3><p>Completed</p></div>
+    <!-- Navbar -->
+  <header class="header">
+    <div class="header-brand">
+      <div class="brand-icon">✓</div>
+      TaskManager Pro
     </div>
+    <div class="header-right">
+      <div id="dashboard-date" style="font-size: 12px; color: var(--text-muted); margin-right: 20px; font-weight: 500;"></div>
+      <span class="header-user" id="header-username"></span>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </header>
 
-    <div class="container dashboard-container">
-        
-        <!-- Add Task Box -->
-        <div class="add-task-box section-box">
+    <!-- Main Content -->
+    <main class="dashboard-main">
+
+        <!-- Stats Row -->
+        <div class="stats-container" id="statsContainer">
+            <div class="stat-box">
+                <div class="stat-icon total">📋</div>
+                <h3 id="stat-total">0</h3>
+                <p>Total Tasks</p>
+            </div>
+            <div class="stat-box">
+                <div class="stat-icon pending">🕐</div>
+                <h3 id="stat-pending">0</h3>
+                <p>Pending</p>
+            </div>
+            <div class="stat-box">
+                <div class="stat-icon progress">⚡</div>
+                <h3 id="stat-inprogress">0</h3>
+                <p>In Progress</p>
+            </div>
+            <div class="stat-box">
+                <div class="stat-icon done">✅</div>
+                <h3 id="stat-completed">0</h3>
+                <p>Completed</p>
+            </div>
+        </div>
+
+        <!-- Add Task -->
+        <div class="section-box">
             <h3>Add New Task</h3>
             <div class="input-row">
-                <input id="title" type="text" placeholder="Task Title">
-                <input id="desc" type="text" placeholder="Description">
+                <input id="title" type="text" placeholder="Task title">
+                <input id="desc" type="text" placeholder="Short description">
             </div>
             <div class="input-row">
                 <select id="add-priority">
@@ -36,15 +65,15 @@
                     <option value="high">High Priority</option>
                 </select>
                 <input id="add-dueDate" type="date">
-                <button onclick="addTask()" class="primary-btn">Add Task</button>
+                <button onclick="addTask()" class="primary-btn" style="width:auto;flex:0 0 auto;padding:11px 20px;">Add
+                    Task</button>
             </div>
+            <p id="error-message" class="error"></p>
         </div>
 
-        <p id="error-message" class="error"></p>
-
-        <!-- Filters & Search -->
-        <div class="filters-box section-box">
-            <input type="text" id="filter-search" placeholder="Search tasks by title..." onkeyup="applyFilters()">
+        <!-- Filters -->
+        <div class="section-box filters-box">
+            <input type="text" id="filter-search" placeholder="🔍  Search by title…" onkeyup="applyFilters()">
             <select id="filter-status" onchange="applyFilters()">
                 <option value="">All Statuses</option>
                 <option value="pending">Pending</option>
@@ -60,29 +89,30 @@
             <input type="date" id="filter-dueDate" onchange="applyFilters()">
         </div>
 
-        <!-- Task List Grid -->
+        <!-- Task Grid -->
         <div id="taskList" class="task-grid"></div>
-    </div>
+
+    </main>
 
     <!-- History Modal -->
     <div id="historyModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <button class="close" onclick="closeModal()">&#x2715;</button>
             <h3 id="modal-task-title">Task History</h3>
-            <ul id="modal-history-list" class="history-list">
-                <!-- History items injected here -->
-            </ul>
+            <ul id="modal-history-list" class="history-list"></ul>
         </div>
     </div>
 
     <!-- Edit Task Modal -->
     <div id="editModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeEditModal()">&times;</span>
+            <button class="close" onclick="closeEditModal()">&#x2715;</button>
             <h3>Edit Task</h3>
             <input type="hidden" id="edit-id">
-            <div class="input-row" style="flex-direction: column;">
-                <input id="edit-title" type="text" placeholder="Task Title">
+            <div class="input-row">
+                <input id="edit-title" type="text" placeholder="Task title">
+            </div>
+            <div class="input-row">
                 <input id="edit-desc" type="text" placeholder="Description">
             </div>
             <div class="input-row">
@@ -93,10 +123,14 @@
                 </select>
                 <input id="edit-dueDate" type="date">
             </div>
-            <button onclick="submitEditTask()" class="primary-btn" style="width: 100%; margin-top: 15px;">Save Changes</button>
+            <button onclick="submitEditTask()" class="primary-btn" style="margin-top:16px;">Save Changes</button>
         </div>
     </div>
 
+    <!-- Toast container -->
+    <div class="toast-container" id="toastContainer"></div>
+
     <script src="script.js"></script>
 </body>
+
 </html>
